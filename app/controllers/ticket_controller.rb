@@ -9,9 +9,6 @@ class TicketController < ApplicationController
       @ticket.normal = 0
       @ticket.shareDrink = 0
       @ticket.normalDrink = 0
-      @ticket.discount = 0
-      @ticket.upgrade = 0
-      @ticket.free = 0
 
       if @ticket.save
         redirect_to root_path
@@ -25,20 +22,14 @@ class TicketController < ApplicationController
     @ticket.sum = @ticket.sum + @price
 
     # Ticket counter
-    if @price == 400
+    if @price == 75
       @ticket.share = @ticket.share + 1
-    elsif @price == 500
-      @ticket.normal = @ticket.normal + 1
-    elsif @price == 550
-      @ticket.shareDrink = @ticket.shareDrink + 1
-    elsif @price == 650
-      @ticket.normalDrink = @ticket.normalDrink + 1
-    elsif @price == 250
-      @ticket.normalDrink = @ticket.discount + 1
     elsif @price == 150
-      @ticket.normalDrink = @ticket.upgrade + 1
-    elsif @price == 0
-      @ticket.normalDrink = @ticket.free + 1
+      @ticket.normal = @ticket.normal + 1
+    elsif @price == 1000
+      @ticket.shareDrink = @ticket.shareDrink + 1
+    elsif @price == 200
+      @ticket.normalDrink = @ticket.normalDrink + 1
     end
 
     if @ticket.save
@@ -51,20 +42,14 @@ class TicketController < ApplicationController
     @price = params[:price].to_i
 
     # Ticket counter
-    if @price == 400
+    if @price == 75
       @ticket.share = @ticket.share - 1
-    elsif @price == 500
-      @ticket.normal = @ticket.normal - 1
-    elsif @price == 550
-      @ticket.shareDrink = @ticket.shareDrink - 1
-    elsif @price == 650
-      @ticket.normalDrink = @ticket.normalDrink - 1
-    elsif @price == 250
-      @ticket.normalDrink = @ticket.discount - 1
     elsif @price == 150
-      @ticket.normalDrink = @ticket.upgrade - 1
-    elsif @price == 0
-      @ticket.normalDrink = @ticket.free - 1
+      @ticket.normal = @ticket.normal - 1
+    elsif @price == 1000
+      @ticket.shareDrink = @ticket.shareDrink - 1
+    elsif @price == 200
+      @ticket.normalDrink = @ticket.normalDrink - 1
     end 
 
     @ticket.sum = @ticket.sum - @price
